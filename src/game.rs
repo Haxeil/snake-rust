@@ -61,7 +61,11 @@ impl Game
             Key::Down => Some(Direction::Down),
             Key::Right => Some(Direction::Right),
             Key::Left => Some(Direction::Left),
-            _ => None,
+            Key::W => Some(Direction::Up),
+            Key::S => Some(Direction::Down),
+            Key::A => Some(Direction::Left),
+            Key::D => Some(Direction::Right),
+            _ => Some(self.snake.head_direction()),
         };
 
         if dir.unwrap() == self.snake.head_direction().opposite()
@@ -147,13 +151,13 @@ impl Game
     {
         let mut rng = thread_rng();
         
-        let mut new_x = rng.gen_range(1..=(self.width - 1));
-        let mut new_y = rng.gen_range(1..=(self.width - 1));
+        let mut new_x = rng.gen_range(1..(self.width - 1));
+        let mut new_y = rng.gen_range(1..(self.width - 1));
 
         while self.snake.overlap_tail(new_x, new_y)
         {
-            new_x = rng.gen_range(1..=self.width - 1);
-            new_y = rng.gen_range(1..=self.width - 1);
+            new_x = rng.gen_range(1..self.width - 1);
+            new_y = rng.gen_range(1..self.width - 1);
         }
         self.food_x = new_x;
         self.food_y = new_y;
