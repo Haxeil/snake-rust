@@ -2,15 +2,14 @@ extern crate piston_window;
 extern crate rand;
 
 mod draw;
-mod snake;
 mod game;
+mod snake;
 
-use piston_window::*;
 use piston_window::types::Color;
+use piston_window::*;
 
-
-use crate::game::Game;
 use crate::draw::to_coord_u32;
+use crate::game::Game;
 
 const BACK_COLOR: Color = [0.5, 0.5, 0.5, 1.0];
 
@@ -38,5 +37,3 @@ fn main() {
         });
     }
 }
-
-
